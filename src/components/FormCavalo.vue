@@ -1,45 +1,53 @@
 <template >
     <div>
-        <form class="m-2" @submit.prevent="tiraMedidas">
+        <Form class="m-2" @submit="tiraMedidas">
             <div class="form-group mb-2">
                 <label for="comprimentoDoCorpo">Comp. do Corpo:</label>
-                <input type="number" v-model="comprimentoDoCorpo" class="form-control" id="comprimentoDoCorpo"
-                    placeholder="Comprimento do Corpo">
+                <Field type="number" v-model="comprimentoDoCorpo" class="form-control" id="comprimentoDoCorpo"
+                    placeholder="Comprimento do Corpo" :rules="validate" name="comprimentoCorpo"/>
+                    <ErrorMessage name="comprimentoCorpo" style="color: red;"/>
             </div>
             <div class="form-group mb-2">
                 <label for="comprimentoDaEspadua">Comp. da espádua:</label>
-                <input type="number" v-model="comprimentoDaEspadua" class="form-control" id="comprimentoDaEspadua"
-                    placeholder="Comprimento da espadua">
+                <Field type="number" v-model="comprimentoDaEspadua" class="form-control" id="comprimentoDaEspadua"
+                    placeholder="Comprimento da espadua" :rules="validate" name="comprimentoEspadua"/>
+                     <ErrorMessage name="comprimentoEspadua" style="color: red;"/>
             </div>
             <div class="form-group mb-2">
                 <label for="comprimentoDorsoLombar">Comp. dorso-lombar:</label>
-                <input type="number" v-model="comprimentoDorsoLombar" class="form-control" id="comprimentoDorsoLombar"
-                    placeholder="Comprimento dorso-lombar">
+                <Field type="number" v-model="comprimentoDorsoLombar" class="form-control" id="comprimentoDorsoLombar"
+                    placeholder="Comprimento dorso-lombar" :rules="validate" name="comprimentoDorsoLombar"/>
+                     <ErrorMessage name="comprimentoDorsoLombar" style="color: red;"/>
             </div>
             <div class="form-group mb-2">
                 <label for="larguraDoPeito">Largura do peito:</label>
-                <input type="number" v-model="larguraDoPeito" class="form-control" id="larguraDoPeito"
-                    placeholder="Largura do peito">
+                <Field type="number" v-model="larguraDoPeito" class="form-control" id="larguraDoPeito"
+                    placeholder="Largura do peito" :rules="validate" name="larguraPeito"/>
+                     <ErrorMessage name="larguraPeito" style="color: red;"/>
             </div>
             <div class="form-group mb-2">
                 <label for="larguraDasAncas">Largura das ancas:</label>
-                <input type="number" v-model="larguraDasAncas" class="form-control" id="larguraDasAncas"
-                    placeholder="Largura das ancas">
+                <Field type="number" v-model="larguraDasAncas" class="form-control" id="larguraDasAncas"
+                    placeholder="Largura das ancas" :rules="validate" name="larguraAncas"/>
+                     <ErrorMessage name="larguraAncas" style="color: red;"/>
             </div>
             <div class="form-group mb-2">
                 <label for="alturaDaGarupa">Altura da garupa:</label>
-                <input type="number" v-model="alturaDaGarupa" class="form-control" id="alturaDaGarupa"
-                    placeholder="Altura da garupa">
+                <Field type="number" v-model="alturaDaGarupa" class="form-control" id="alturaDaGarupa"
+                    placeholder="Altura da garupa" :rules="validate" name="alturaGarupa"/>
+                     <ErrorMessage name="alturaGarupa" style="color: red;"/>
             </div>
             <div class="form-group mb-2">
                 <label for="alturaDaCernelha">Altura da cernelha:</label>
-                <input type="number" v-model="alturaDaCernelha" class="form-control" id="alturaDaCernelha"
-                    placeholder="Altura da cernelha">
+                <Field type="number" v-model="alturaDaCernelha" class="form-control" id="alturaDaCernelha"
+                    placeholder="Altura da cernelha" :rules="validate" name="alturaCernelha"/>
+                     <ErrorMessage name="alturaCernelha" style="color: red;"/>
             </div>
             <div class="form-group mb-2">
                 <label for="alturaDoDorso">Altura do dorso:</label>
-                <input type="number" v-model="alturaDoDorso" class="form-control" id="alturaDoDorso"
-                    placeholder="Altura do dorso">
+                <Field type="number" v-model="alturaDoDorso" class="form-control" id="alturaDoDorso"
+                    placeholder="Altura do dorso" :rules="validate" name="alturaDorso"/>
+                     <ErrorMessage name="alturaDorso" style="color: red;"/>
             </div>
             <fieldset class="form-group mb-2">
                 <div class="row">
@@ -67,14 +75,19 @@
             <div class="row justify-content-center">
                 <button type="submit" class="btn btn-primary w-50 p-3">Calcular</button>
             </div>
-        </form>
+        </Form>
     </div>
 </template>
 <script>
-
+import { Form, Field, ErrorMessage } from 'vee-validate'
 
 export default {
     name: 'FormCavalo',
+    components: {
+        Form,
+        Field,
+        ErrorMessage
+    },
     data() {
         return {
             comprimentoDoCorpo: null,
@@ -88,8 +101,9 @@ export default {
             sexo: 'macho'
         }
     },
-     methods: {
-         tiraMedidas(){
+    methods: {
+
+        tiraMedidas() {
             const data = {
                 comprimentoDoCorpo: this.comprimentoDoCorpo,
                 comprimentoDaEspadua: this.comprimentoDaEspadua,
@@ -102,16 +116,26 @@ export default {
                 sexo: this.sexo
             }
             this.comprimentoDoCorpo = '',
-            this.comprimentoDaEspadua = '',
-            this.comprimentoDorsoLombar = '',
-            this.larguraDoPeito = '',
-            this.larguraDasAncas = '',
-            this.alturaDaGarupa = '',
-            this.alturaDaCernelha = '',
-            this.alturaDoDorso = '',
-            this.sexo = 'macho'
-            
+                this.comprimentoDaEspadua = '',
+                this.comprimentoDorsoLombar = '',
+                this.larguraDoPeito = '',
+                this.larguraDasAncas = '',
+                this.alturaDaGarupa = '',
+                this.alturaDaCernelha = '',
+                this.alturaDoDorso = '',
+                this.sexo = 'macho'
+
             console.log(data)
+        },
+
+        //Verifica se os campos do formulario estao vazios
+        validate(value) {
+            // if the field is empty
+            if (!value) {
+                return 'Este campo é obriagatório';
+            }
+            // All is good
+            return true;
         }
     }
 }
