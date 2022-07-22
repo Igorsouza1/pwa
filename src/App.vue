@@ -1,19 +1,19 @@
 <template>
   <div>
     <nav-bar></nav-bar>
-    <form-cavalo></form-cavalo>
+    <router-link to="/formulario" hidden>forme</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import NavBar from './components/NavBar.vue'
-import FormCavalo from './components/FormCavalo.vue'
+
 
 export default {
   name: 'App',
   components: {
-    NavBar,
-    FormCavalo
+    NavBar
   }
 }
 </script>
