@@ -10,10 +10,12 @@
   "dependencies": {
     "@auth0/auth0-vue": "^1.0.2",
     "core-js": "^3.8.3",
+    "global": "^4.4.0",
     "register-service-worker": "^1.7.2",
     "vee-validate": "^4.6.1",
     "vue": "^3.2.13",
-    "vue-router": "4"
+    "vue-router": "4",
+    "wrangler": "^2.0.23"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
