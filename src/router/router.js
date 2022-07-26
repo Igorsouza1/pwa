@@ -4,8 +4,7 @@ import {createRouter, createWebHashHistory }from 'vue-router'
 import FormCavalo from '../views/FormCavalo.vue'
 
 const routes = [
-    
-    {path: '/formulario', component: FormCavalo}
+    {path: '/', component: FormCavalo}
 ]
 
 const router = createRouter({

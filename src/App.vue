@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav-bar></nav-bar>
-    <router-link to="/formulario" hidden>forme</router-link>
+    <router-link to="/" hidden>forme</router-link>
     <router-view></router-view>
   </div>
 </template>
