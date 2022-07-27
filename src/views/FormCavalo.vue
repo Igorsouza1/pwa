@@ -104,17 +104,7 @@ export default {
     methods: {
 
         tiraMedidas() {
-            const data = {
-                comprimentoDoCorpo: this.comprimentoDoCorpo,
-                comprimentoDaEspadua: this.comprimentoDaEspadua,
-                comprimentoDorsoLombar: this.comprimentoDorsoLombar,
-                larguraDoPeito: this.larguraDoPeito,
-                larguraDasAncas: this.larguraDasAncas,
-                alturaDaGarupa: this.alturaDaGarupa,
-                alturaDaCernelha: this.alturaDaCernelha,
-                alturaDoDorso: this.alturaDoDorso,
-                sexo: this.sexo
-            }
+            
             this.comprimentoDoCorpo = '',
                 this.comprimentoDaEspadua = '',
                 this.comprimentoDorsoLombar = '',
@@ -125,7 +115,6 @@ export default {
                 this.alturaDoDorso = '',
                 this.sexo = 'macho'
 
-            console.log(data)
         },
 
         //Verifica se os campos do formulario estao vazios
