@@ -1,8 +1,8 @@
 <template>
   <div>
     <nav-bar></nav-bar>
-    <router-link to="/" hidden>forme</router-link>
-    <router-link to="/form" hidden>login</router-link>
+    <router-link to="" hidden>forme</router-link>
+    <router-link to="form" hidden>login</router-link>
     <router-view></router-view>
   </div>
 </template>
