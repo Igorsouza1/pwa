@@ -5,8 +5,8 @@ import FormCavalo from '../views/FormCavalo.vue'
 import LoginAuth from '../views/LoginAuth.vue'
 
 const routes = [
-    {path: '/', component: LoginAuth},
-    {path: '/form', component: FormCavalo}
+    {path: '/', component: FormCavalo},
+    {path: '/login', component: LoginAuth}
 ]
 
 const router = createRouter({

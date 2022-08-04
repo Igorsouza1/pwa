@@ -2,7 +2,7 @@
   <div>
     <nav-bar></nav-bar>
     <router-link to="/" hidden>login</router-link>
-    <router-link to="form" style="margin: -500px">form</router-link>
+    <router-link to="/login" hidden>form</router-link>
     <router-view></router-view>
   </div>
 </template>
