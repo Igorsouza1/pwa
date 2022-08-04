@@ -39,6 +39,36 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@auth0/auth0-spa-js@npm:^1.22.1":
+  version: 1.22.2
+  resolution: "@auth0/auth0-spa-js@npm:1.22.2"
+  dependencies:
+    abortcontroller-polyfill: ^1.7.3
+    browser-tabs-lock: ^1.2.15
+    core-js: ^3.23.2
+    es-cookie: ^1.3.2
+    fast-text-encoding: ^1.0.4
+    promise-polyfill: ^8.2.3
+    unfetch: ^4.2.0
+  checksum: 24f3fed2eb38a5898dd07aabb61f42b220668d64d382b92c5187bd58d19bcff2f4974e6725684fc7b7d37ca713fd8bb990eef499ab3ab8af3b9f23e413f965b5
+  languageName: node
+  linkType: hard
+
+"@auth0/auth0-vue@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@auth0/auth0-vue@npm:1.0.2"
+  dependencies:
+    "@auth0/auth0-spa-js": ^1.22.1
+    vue: ^3.2.35
+  peerDependencies:
+    vue-router: ^4.0.12
+  peerDependenciesMeta:
+    vue-router:
+      optional: true
+  checksum: 6a1b74b3bca4fa3549e0586d14d19e1b5edf392799918a778d34bc4ae5a92993bc7a9e7d26bc223f3ada1ced29f043884aa57d5de990c6d985cd0345937fb15e
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:7.12.11":
   version: 7.12.11
   resolution: "@babel/code-frame@npm:7.12.11"
@@ -2609,6 +2639,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"abortcontroller-polyfill@npm:^1.7.3":
+  version: 1.7.3
+  resolution: "abortcontroller-polyfill@npm:1.7.3"
+  checksum: 55739d7f0c9bd6afa2aabb3148778967c4dd4dcff91f6b9259df38da34f9882d3f7730b0954e9767a19cc16a8dd9a58915da4e8a50220300d45af3817d7557b1
+  languageName: node
+  linkType: hard
+
 "accepts@npm:~1.3.4, accepts@npm:~1.3.5, accepts@npm:~1.3.8":
   version: 1.3.8
   resolution: "accepts@npm:1.3.8"
@@ -3111,6 +3148,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"browser-tabs-lock@npm:^1.2.15":
+  version: 1.2.15
+  resolution: "browser-tabs-lock@npm:1.2.15"
+  dependencies:
+    lodash: ">=4.17.21"
+  checksum: 79194361d5dbd0bf83f1e7e56fdbc209161d1c86f8211214512388df126d69b152512f073392e9415dec8d5e3b427045f9a9a3cb089ae7e7f6ed48dd6022ae74
+  languageName: node
+  linkType: hard
+
 "browserslist@npm:^4.0.0, browserslist@npm:^4.14.5, browserslist@npm:^4.16.3, browserslist@npm:^4.16.6, browserslist@npm:^4.20.2, browserslist@npm:^4.20.3, browserslist@npm:^4.21.1":
   version: 4.21.1
   resolution: "browserslist@npm:4.21.1"
@@ -3260,6 +3306,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "cavalo_pwa_v2@workspace:."
   dependencies:
+    "@auth0/auth0-vue": ^1.0.2
     "@babel/core": ^7.12.16
     "@babel/eslint-parser": ^7.12.16
     "@vue/cli-plugin-babel": ~5.0.0
@@ -3653,7 +3700,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.8.3":
+"core-js@npm:^3.23.2, core-js@npm:^3.8.3":
   version: 3.23.4
   resolution: "core-js@npm:3.23.4"
   checksum: 1317591dbd4a6dc357b68da324dfab52ffecc0193fe577c55bedc058af3ec96a47c7d68dff4dc914badf398ca120c0b58815fca3a162a497abf73166910d834c
@@ -4283,6 +4330,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"es-cookie@npm:^1.3.2":
+  version: 1.3.2
+  resolution: "es-cookie@npm:1.3.2"
+  checksum: 8509355a7d00bd2e3fcab4a76a90e0da35b40c1e76f114f8ffe805ab3fdfff51e8fc0e7cdccd9bf1536066150b6b9861e37d78ae14f80680513901902ac4f0df
+  languageName: node
+  linkType: hard
+
 "es-module-lexer@npm:^0.9.0":
   version: 0.9.3
   resolution: "es-module-lexer@npm:0.9.3"
@@ -4702,6 +4756,13 @@ __metadata:
   version: 2.0.6
   resolution: "fast-levenshtein@npm:2.0.6"
   checksum: 92cfec0a8dfafd9c7a15fba8f2cc29cd0b62b85f056d99ce448bbcd9f708e18ab2764bda4dd5158364f4145a7c72788538994f0d1787b956ef0d1062b0f7c24c
+  languageName: node
+  linkType: hard
+
+"fast-text-encoding@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "fast-text-encoding@npm:1.0.4"
+  checksum: aa92d27451ad972ac8391b40f8680dc6722513b0b9c123bc6991fb789e46302a89d76a4e23a3071ca2071a63e5e116a0c75d790703a5568b22019350196e405d
   languageName: node
   linkType: hard
 
@@ -6194,7 +6255,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.14, lodash@npm:^4.17.20, lodash@npm:^4.17.21":
+"lodash@npm:>=4.17.21, lodash@npm:^4.17.14, lodash@npm:^4.17.20, lodash@npm:^4.17.21":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -7607,6 +7668,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"promise-polyfill@npm:^8.2.3":
+  version: 8.2.3
+  resolution: "promise-polyfill@npm:8.2.3"
+  checksum: f320278bab8b8ce32f0e2f377d75aabe35c90a79f92b3e001db084d635da1fb8740ba8a26b5c1c2b4cdca5a4c988f9b6b3eb30f0b151d0362d3d9c1675024a8f
+  languageName: node
+  linkType: hard
+
 "promise-retry@npm:^2.0.1":
   version: 2.0.1
   resolution: "promise-retry@npm:2.0.1"
@@ -8955,6 +9023,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"unfetch@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "unfetch@npm:4.2.0"
+  checksum: 6a4b2557e1d921eaa80c4425ce27a404945ec26491ed06e62598f333996a91a44c7908cb26dc7c2746d735762b13276cf4aa41829b4c8f438dde63add3045d7a
+  languageName: node
+  linkType: hard
+
 "unicode-canonical-property-names-ecmascript@npm:^2.0.0":
   version: 2.0.0
   resolution: "unicode-canonical-property-names-ecmascript@npm:2.0.0"
@@ -9187,7 +9262,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue@npm:^3.2.13":
+"vue@npm:^3.2.13, vue@npm:^3.2.35":
   version: 3.2.37
   resolution: "vue@npm:3.2.37"
   dependencies:
