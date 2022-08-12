@@ -1,0 +1,5 @@
+name = "pwa"
+main = "src/index.js"
+account_id = "685ffd21f005b121b0feaf6f8f4c0936"
+compatibility_date = "2022-08-05"
+
