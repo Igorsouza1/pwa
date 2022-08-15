@@ -104,7 +104,7 @@ export default {
     methods: {
 
         tiraMedidas() {
-            
+
             this.comprimentoDoCorpo = '',
                 this.comprimentoDaEspadua = '',
                 this.comprimentoDorsoLombar = '',
