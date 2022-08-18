@@ -117,6 +117,8 @@ export default {
 
         },
 
+     
+
         //Verifica se os campos do formulario estao vazios
         validate(value) {
             // if the field is empty
