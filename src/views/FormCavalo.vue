@@ -75,6 +75,8 @@
             <div class="row justify-content-center">
                 <a type="submit" href="/#/resultado" class="btn btn-primary w-50 p-3">Calcular</a>
             </div>
+           
+            
         </Form>
     </div>
 </template>
@@ -105,15 +107,7 @@ export default {
 
         tiraMedidas() {
 
-            this.comprimentoDoCorpo = '',
-                this.comprimentoDaEspadua = '',
-                this.comprimentoDorsoLombar = '',
-                this.larguraDoPeito = '',
-                this.larguraDasAncas = '',
-                this.alturaDaGarupa = '',
-                this.alturaDaCernelha = '',
-                this.alturaDoDorso = '',
-                this.sexo = 'macho'
+            console.log("GG")
 
         },
 
