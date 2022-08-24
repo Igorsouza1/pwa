@@ -75,9 +75,7 @@
             <div class="row justify-content-center">
                 <a type="submit" href="/#/resultado" class="btn btn-primary w-50 p-3">Calcular</a>
             </div>
-            <div class="row justify-content-center">
-                <a type="submit" href="/#/resultado" class="btn btn-primary w-50 p-3">Calcular</a>
-            </div>
+          
            
             
         </Form>
