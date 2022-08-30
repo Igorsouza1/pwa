@@ -3,10 +3,11 @@
 import { register } from 'register-service-worker'
 
 
+
 //PADRAO
 if (process.env.NODE_ENV === 'production') {
-  register(`${process.env.BASE_URL}service-worker.js`, {
-    ready () {
+ register(`${process.env.BASE_URL}service-worker.js`, {
+    ready () {  
 
       console.log(
         'App is being served from cache by a service worker.\n' +
@@ -33,6 +34,7 @@ if (process.env.NODE_ENV === 'production') {
           }),
         );
       });
+     
       console.log('New content is downloading.')
     },
     updated () {

@@ -3,7 +3,11 @@ const fs = require('fs')
 
 
 module.exports = defineConfig({
- 
+
   transpileDependencies: true,
+  pwa: {
+    name: 'Cavalo Pantaneiro',
+    themeColor: '#4DBA88'
+  }
  
 })
