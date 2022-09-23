@@ -1,8 +1,8 @@
 <template>
-    <div class="teste">
+    <div class="teste" v-bind:onload="solicitacao()">
         <div class="card m-auto mt-2" style="width: 90%;">
             <div class="card-body">
-                <h5 class="card-title">Cavalo Pantaneiro - Alta Qualidade</h5>
+                <h5 class="card-title">Cavalo Pantaneiro - {{qualidade}}</h5>
                 <p class="card-text">Média: {{media}} </p>
                 <p class="card-text">(1-2)Altura da Cernelha: {{comprimentoDaEspadua}} </p>
                 <p class="card-text">(3-4)Altura do Dorso: {{alturaDaGarupa}} </p>
@@ -30,8 +30,15 @@ export default {
             media: null,
             comprimentoDoCorpo: null,
             comprimentoDaEspadua: null,
-            alturaDaGarupa: null
+            alturaDaGarupa: null,
+            qualidade: "Alta Qualidade"
         }
+    },
+    methods:{
+        solicitacao(){
+             fetch('https://pwa.igor1-souza5320.workers.dev').then(() => console.log("deu certo"))
+        }
+        
     }
 }
 </script>

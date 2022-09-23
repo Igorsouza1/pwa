@@ -24,6 +24,9 @@ async function formRequest(request) {
   const url = new URL(request.url)
   if (url.pathname === '/submit') {
     return submitHandler(request)
+  }else
+  if(url.pathname === '/medidasKV'){
+    console.log("testando")
   }
 
   return new Response('NAO É SUBMIT', { status: 200 });
@@ -58,6 +61,7 @@ const submitHandler = async request => {
   let relacaoAltCernelhaCorpo = parseInt(body.alturaCernelha) / parseInt(body.comprimentoCorpo)
   let relacaoAncasDorso = parseInt(body.larguraAncas) / parseInt(body.alturaDorso)
   
+  
   await medidasCavalos.put("comprimentoCorpo", body.comprimentoCorpo)
   await medidasCavalos.put("alturaDorso", body.alturaDorso)
   await medidasCavalos.put("larguraPeito", body.larguraPeito)
@@ -76,9 +80,9 @@ const submitHandler = async request => {
   await medidasCavalos.put("sexo", sexo)
 
 
-  //console.log(machine.classify([parseInt(body.comprimentoCorpo),	parseInt(body.alturaDorso),	parseInt(body.larguraPeito),	parseInt(body.alturaGarupa),	parseInt(body.comprimentoEspadua),	parseInt(body.comprimentoDorsoLombar),	parseInt(body.alturaCernelha),	parseInt(body.larguraAncas),	relacaoDorsoGarupa,	relacaoAltCernelhaCorpo,	relacaoAncasDorso,	parseInt(body.sexo)]))
+  console.log(machine.classify([parseInt(body.comprimentoCorpo),	parseInt(body.alturaDorso),	parseInt(body.larguraPeito),	parseInt(body.alturaGarupa),	parseInt(body.comprimentoEspadua),	parseInt(body.comprimentoDorsoLombar),	parseInt(body.alturaCernelha),	parseInt(body.larguraAncas),	relacaoDorsoGarupa,	relacaoAltCernelhaCorpo,	relacaoAncasDorso,	parseInt(body.sexo)]))
 
-  console.log(JSON.stringify(body))
+  //console.log(JSON.stringify(body))
   return Response.redirect("http://localhost:8080/#/resultado")
 }
 
