@@ -7,16 +7,12 @@
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
-<<<<<<< HEAD
- import treinox from "./assets/medidas/treinoX"
- import treinoy from "./assets/medidas/treinoY"
- import KNN from "ml-knn"
-=======
+
 import * as generator from "../node_modules/knear"
 import medidasx from "./assets/medidas/medidasX"
 import medidasy from "./assets/medidas/medidasY"
 
->>>>>>> ad10b5495ba3f653745093eaacfff84a2be08b9f
+
 
 addEventListener('fetch', event => {
   console.log(`Received new request: ${event.request.url}`);
@@ -37,7 +33,7 @@ async function formRequest(request) {
 
 
 const submitHandler = async request => {
-
+  
   //Verifica se o method é POST
   if (request.method != 'POST') {
     return new Response("Metho Not Allowed", {
@@ -52,25 +48,6 @@ const submitHandler = async request => {
     body[entry[0]] = entry[1];
   }
 
-<<<<<<< HEAD
-  var train_dataset = treinox
-  var train_labels = treinoy
-  var knn = new KNN(train_dataset, train_labels, { k: 2 }); // consider 2 nearest neighbors
-  
-  //relação das medidas
-  var relacaoDorsoLombar = body.alturaDorso / body.alturaGarupa
-  var relacaoCernelhaCorpo = body.alturaCernelha / body.comprimentoCorpo
-  var relacaoAncasDorso = body.larguraAncas / body.alturaDorso
-
-  var dataset = [body.comprimentoCorpo, body.alturaDorso, body.larguraPeito, body.alturaGarupa, body.comprimentoEspadua, body.comprimentoDorsoLombar, body.alturaCernelha, body.larguraAncas, relacaoDorsoLombar, relacaoCernelhaCorpo, relacaoAncasDorso, 1.0]
-  console.log(dataset)
-var ans = knn.predict(dataset);
-
-console.log(ans)
-
-  console.log(JSON.stringify(body))
-  return Response.redirect("http://localhost:8080/#/")
-=======
   //Aprendizado
   var k = 2; //k can be any integer
   var machine = new generator.kNear(k);
@@ -101,11 +78,11 @@ console.log(ans)
   await medidasCavalos.put("sexo", sexo)
 
 
-  //console.log(machine.classify([parseInt(body.comprimentoCorpo),	parseInt(body.alturaDorso),	parseInt(body.larguraPeito),	parseInt(body.alturaGarupa),	parseInt(body.comprimentoEspadua),	parseInt(body.comprimentoDorsoLombar),	parseInt(body.alturaCernelha),	parseInt(body.larguraAncas),	relacaoDorsoGarupa,	relacaoAltCernelhaCorpo,	relacaoAncasDorso,	parseInt(body.sexo)]))
+  console.log(machine.classify([parseInt(body.comprimentoCorpo),	parseInt(body.alturaDorso),	parseInt(body.larguraPeito),	parseInt(body.alturaGarupa),	parseInt(body.comprimentoEspadua),	parseInt(body.comprimentoDorsoLombar),	parseInt(body.alturaCernelha),	parseInt(body.larguraAncas),	relacaoDorsoGarupa,	relacaoAltCernelhaCorpo,	relacaoAncasDorso,	parseInt(body.sexo)]))
 
-  console.log(JSON.stringify(body))
+  //console.log(JSON.stringify(body))
   return Response.redirect("http://localhost:8080/#/resultado")
->>>>>>> ad10b5495ba3f653745093eaacfff84a2be08b9f
 }
 
-
+ 
+  

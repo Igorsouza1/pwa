@@ -70,10 +70,6 @@
                                 Femea
                             </label>
                             <br />
-<<<<<<< HEAD
-                        
-=======
->>>>>>> ad10b5495ba3f653745093eaacfff84a2be08b9f
                         </div>
                     </div>
                 </div>
@@ -111,10 +107,11 @@ export default {
         }
     },
     methods: {
-
+       
         tiraMedidas() {
             this.$emit('tiraMedidas', this.medidaCavalo)
         },
+       
 
         //Verifica se os campos do formulario estao vazios
         validate(value) {
