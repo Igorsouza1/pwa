@@ -70,7 +70,10 @@
                                 Femea
                             </label>
                             <br />
+<<<<<<< HEAD
                         
+=======
+>>>>>>> ad10b5495ba3f653745093eaacfff84a2be08b9f
                         </div>
                     </div>
                 </div>
@@ -95,8 +98,7 @@ export default {
         ErrorMessage
     },
     data() {
-        return {
-            
+        return {   
                 comprimentoDoCorpo: null,
                 comprimentoDaEspadua: null,
                 comprimentoDorsoLombar: null,
@@ -106,7 +108,6 @@ export default {
                 alturaDaCernelha: null,
                 alturaDoDorso: null,
                 sexo: 0
-            
         }
     },
     methods: {

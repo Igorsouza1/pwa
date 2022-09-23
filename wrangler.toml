@@ -3,3 +3,7 @@ main = "src/index.js"
 account_id = "685ffd21f005b121b0feaf6f8f4c0936"
 compatibility_date = "2022-08-05"
 
+kv_namespaces = [
+
+  { binding = "medidasCavalos", preview_id = "5cc07f7832024851858604279de83278", id = "5cc07f7832024851858604279de83278" }
+]
