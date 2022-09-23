@@ -1,6 +1,6 @@
 <template >
     <div>
-        <Form class="m-2"  method="POST" action="https://pwa.igor1-souza5320.workers.dev/submit">
+        <Form class="m-2"  method="POST" action="http://localhost:8787/submit">
             <div class="form-group mb-2">
                 <label for="comprimentoDoCorpo">Comp. do Corpo:</label>
                 <Field type="number" v-model="comprimentoDoCorpo" class="form-control"
@@ -57,20 +57,20 @@
                     <legend class="col-form-label col-sm-2 pt-0">Sexo:</legend>
                     <div class="col-sm-10">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sexo" id="macho" value="macho"
+                            <input class="form-check-input" type="radio" name="sexo" id="macho" value="0"
                                 v-model="sexo" checked>
                             <label class="form-check-label" for="Macho">
                                 Macho
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sexo" id="femea" value="femea"
+                            <input class="form-check-input" type="radio" name="sexo" id="femea" value="1"
                                 v-model="sexo">
                             <label class="form-check-label" for="femea">
                                 Femea
                             </label>
                             <br />
-                            <span>Sexo: {{  sexo  }}</span>
+                        
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@ export default {
                 alturaDaGarupa: null,
                 alturaDaCernelha: null,
                 alturaDoDorso: null,
-                sexo: 'macho'
+                sexo: 0
             
         }
     },

@@ -4947,6 +4947,18 @@
   dependencies:
     "minimist" "^1.2.6"
 
+"ml-distance-euclidean@^2.0.0":
+  "integrity" "sha512-yC9/2o8QF0A3m/0IXqCTXCzz2pNEzvmcE/9HFKOZGnTjatvBbsn4lWYJkxENkA4Ug2fnYl7PXQxnPi21sgMy/Q=="
+  "resolved" "https://registry.npmjs.org/ml-distance-euclidean/-/ml-distance-euclidean-2.0.0.tgz"
+  "version" "2.0.0"
+
+"ml-knn@^3.0.0":
+  "integrity" "sha512-w7Jig4vW09OYMurlIRRJj8yL2O/835QJpxup+yW7QVYXSjixmanPtPQL+weiTYbaB/wWX8JilB+Wllk4mxvP5w=="
+  "resolved" "https://registry.npmjs.org/ml-knn/-/ml-knn-3.0.0.tgz"
+  "version" "3.0.0"
+  dependencies:
+    "ml-distance-euclidean" "^2.0.0"
+
 "module-alias@^2.2.2":
   "integrity" "sha512-A/78XjoX2EmNvppVWEhM2oGk3x4lLxnkEA4jTbaK97QKSDjkIoOsKQlfylt/d3kKKi596Qy3NP5XrXJ6fZIC9Q=="
   "resolved" "https://registry.npmjs.org/module-alias/-/module-alias-2.2.2.tgz"
