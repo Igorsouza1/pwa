@@ -7,14 +7,16 @@
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
+
 import * as generator from "../node_modules/knear"
 import medidasx from "./assets/medidas/medidasX"
 import medidasy from "./assets/medidas/medidasY"
 
 
+
 addEventListener('fetch', event => {
   console.log(`Received new request: ${event.request.url}`);
-
+  
   //POST DO FORMULARIO
   event.respondWith(formRequest(event.request));
 })
@@ -25,8 +27,8 @@ async function formRequest(request) {
   if (url.pathname === '/submit') {
     return submitHandler(request)
   }else
-  if(url.pathname === '/medidasKV'){
-    console.log("testando")
+  if(url.pathname === '/medidas'){
+    return "teste"
   }
 
   return new Response('NAO É SUBMIT', { status: 200 });
@@ -34,7 +36,7 @@ async function formRequest(request) {
 
 
 const submitHandler = async request => {
-
+  
   //Verifica se o method é POST
   if (request.method != 'POST') {
     return new Response("Metho Not Allowed", {
@@ -86,4 +88,5 @@ const submitHandler = async request => {
   return Response.redirect("http://localhost:8080/#/resultado")
 }
 
-
+ 
+  
