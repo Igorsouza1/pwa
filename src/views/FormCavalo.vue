@@ -57,20 +57,19 @@
                     <legend class="col-form-label col-sm-2 pt-0">Sexo:</legend>
                     <div class="col-sm-10">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sexo" id="macho" value="macho"
+                            <input class="form-check-input" type="radio" name="sexo" id="macho" value="0"
                                 v-model="sexo" checked>
                             <label class="form-check-label" for="Macho">
                                 Macho
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sexo" id="femea" value="femea"
+                            <input class="form-check-input" type="radio" name="sexo" id="femea" value="1"
                                 v-model="sexo">
                             <label class="form-check-label" for="femea">
                                 Femea
                             </label>
                             <br />
-                            <span>Sexo: {{  sexo  }}</span>
                         </div>
                     </div>
                 </div>
@@ -95,8 +94,7 @@ export default {
         ErrorMessage
     },
     data() {
-        return {
-            
+        return {   
                 comprimentoDoCorpo: null,
                 comprimentoDaEspadua: null,
                 comprimentoDorsoLombar: null,
@@ -105,8 +103,7 @@ export default {
                 alturaDaGarupa: null,
                 alturaDaCernelha: null,
                 alturaDoDorso: null,
-                sexo: 'macho'
-            
+                sexo: 0
         }
     },
     methods: {

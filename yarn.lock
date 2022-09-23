@@ -4614,6 +4614,11 @@
   "resolved" "https://registry.npmjs.org/klona/-/klona-2.0.5.tgz"
   "version" "2.0.5"
 
+"knear@^0.0.5":
+  "integrity" "sha512-qusd6MH6kZr+mdbLy+Y/yqkcI2NE7BRfs5dye2W0qm7ks2JqEcvFD1laLRiRHxwXsc4T1oZ05Zf6X7jUM9x3og=="
+  "resolved" "https://registry.npmjs.org/knear/-/knear-0.0.5.tgz"
+  "version" "0.0.5"
+
 "launch-editor-middleware@^2.2.1":
   "integrity" "sha512-/M7AX/6xktZY60KE7j71XLrj9U6H5TBoP+mJzhYB3fcdAq8rcazit/K0qWiu1jvytUPXP4lJRd1VJFwvdMQ/uw=="
   "resolved" "https://registry.npmjs.org/launch-editor-middleware/-/launch-editor-middleware-2.4.0.tgz"

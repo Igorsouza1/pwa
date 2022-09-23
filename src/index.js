@@ -7,6 +7,9 @@
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
+import * as generator from "../node_modules/knear"
+import medidasx from "./assets/medidas/medidasX"
+import medidasy from "./assets/medidas/medidasY"
 
 
 addEventListener('fetch', event => {
@@ -23,12 +26,12 @@ async function formRequest(request) {
     return submitHandler(request)
   }
 
-  return new Response('Hello t!', { status: 200 });
+  return new Response('NAO É SUBMIT', { status: 200 });
 }
 
 
 const submitHandler = async request => {
-  
+
   //Verifica se o method é POST
   if (request.method != 'POST') {
     return new Response("Metho Not Allowed", {
@@ -43,9 +46,23 @@ const submitHandler = async request => {
     body[entry[0]] = entry[1];
   }
 
-  console.log(JSON.stringify(body))
-  return Response.redirect("https://pwa-da1.pages.dev/#/")
+  //Aprendizado
+  var k = 2; //k can be any integer
+  var machine = new generator.kNear(k);
+  for (let i =0; medidasx.length > i; i++) {
+      machine.learn(medidasx[i], medidasy[i]);
+  }
+
+  //relações de medidas
+  let relacaoDorsoGarupa = parseInt(body.alturaDorso)/ parseInt(body.alturaGarupa)
+  let relacaoAltCernelhaCorpo = parseInt(body.alturaCernelha) / parseInt(body.comprimentoCorpo)
+  let relacaoAncasDorso = parseInt(body.alturaAncas) / parseInt(body.alturaDorso)
+  
+
+  console.log(machine.classify([parseInt(body.comprimentoCorpo),	parseInt(body.alturaDorso),	parseInt(body.larguraPeito),	parseInt(body.alturaGarupa),	parseInt(body.comprimentoEspadua),	parseInt(body.comprimentoDorsoLombar),	parseInt(body.alturaCernelha),	parseInt(body.alturaAncas),	relacaoDorsoGarupa,	relacaoAltCernelhaCorpo,	relacaoAncasDorso,	parseInt(body.sexo)]))
+
+  // console.log(JSON.stringify(body))
+  return Response.redirect("https://pwa-da1.pages.dev/#/resultado")
 }
 
- 
-  
+
