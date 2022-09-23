@@ -56,13 +56,30 @@ const submitHandler = async request => {
   //relações de medidas
   let relacaoDorsoGarupa = parseInt(body.alturaDorso)/ parseInt(body.alturaGarupa)
   let relacaoAltCernelhaCorpo = parseInt(body.alturaCernelha) / parseInt(body.comprimentoCorpo)
-  let relacaoAncasDorso = parseInt(body.alturaAncas) / parseInt(body.alturaDorso)
+  let relacaoAncasDorso = parseInt(body.larguraAncas) / parseInt(body.alturaDorso)
   
+  await medidasCavalos.put("comprimentoCorpo", body.comprimentoCorpo)
+  await medidasCavalos.put("alturaDorso", body.alturaDorso)
+  await medidasCavalos.put("larguraPeito", body.larguraPeito)
+  await medidasCavalos.put("alturaGarupa", body.alturaGarupa)
+  await medidasCavalos.put("comprimentoEspadua", body.comprimentoEspadua)
+  await medidasCavalos.put("comprimentoDorsoLombar", body.comprimentoDorsoLombar)
+  await medidasCavalos.put("alturaCernelha", body.alturaCernelha)
+  await medidasCavalos.put("larguraAncas", body.larguraAncas)
 
-  console.log(machine.classify([parseInt(body.comprimentoCorpo),	parseInt(body.alturaDorso),	parseInt(body.larguraPeito),	parseInt(body.alturaGarupa),	parseInt(body.comprimentoEspadua),	parseInt(body.comprimentoDorsoLombar),	parseInt(body.alturaCernelha),	parseInt(body.alturaAncas),	relacaoDorsoGarupa,	relacaoAltCernelhaCorpo,	relacaoAncasDorso,	parseInt(body.sexo)]))
+  let sexo
+  if(body.sexo == "1"){
+    sexo = "femea"
+  }else if(body.sexo == "0"){
+    sexo = "macho"
+  }
+  await medidasCavalos.put("sexo", sexo)
 
-  // console.log(JSON.stringify(body))
-  return Response.redirect("https://pwa-da1.pages.dev/#/resultado")
+
+  //console.log(machine.classify([parseInt(body.comprimentoCorpo),	parseInt(body.alturaDorso),	parseInt(body.larguraPeito),	parseInt(body.alturaGarupa),	parseInt(body.comprimentoEspadua),	parseInt(body.comprimentoDorsoLombar),	parseInt(body.alturaCernelha),	parseInt(body.larguraAncas),	relacaoDorsoGarupa,	relacaoAltCernelhaCorpo,	relacaoAncasDorso,	parseInt(body.sexo)]))
+
+  console.log(JSON.stringify(body))
+  return Response.redirect("http://localhost:8080/#/resultado")
 }
 
 
