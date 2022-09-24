@@ -1,7 +1,7 @@
 <template>
     <div class="teste">
         <div class="card m-auto mt-2" style="width: 90%;">
-            <div class="card-body">
+            <div class="card-body" >
                 <h5 class="card-title">Cavalo Pantaneiro - Alta Qualidade</h5>
                 <p class="card-text">Média: {{media}} </p>
                 <p class="card-text">(1-2)Altura da Cernelha: {{comprimentoDaEspadua}} </p>
@@ -23,6 +23,8 @@
     </div>
 </template>
 <script>
+
+
 export default {
     name: "ResultadoCavalo",
     data() {
@@ -32,7 +34,10 @@ export default {
             comprimentoDaEspadua: null,
             alturaDaGarupa: null
         }
-    }
+    },
+    methods:{
+       
+        }
 }
 </script>
 <style scoped>
