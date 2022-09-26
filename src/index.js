@@ -94,7 +94,7 @@ const submitHandler = async request => {
   console.log(machine.classify([parseInt(body.comprimentoCorpo), parseInt(body.alturaDorso), parseInt(body.larguraPeito), parseInt(body.alturaGarupa), parseInt(body.comprimentoEspadua), parseInt(body.comprimentoDorsoLombar), parseInt(body.alturaCernelha), parseInt(body.larguraAncas), relacaoDorsoGarupa, relacaoAltCernelhaCorpo, relacaoAncasDorso, parseInt(body.sexo)]))
 
   //console.log(JSON.stringify(body))
-  return Response.redirect("http://localhost:8080/#/resultado")
+  return Response.redirect("https://pwa-da1.pages.dev/#/resultado")
 }
 
 const buscarMedidas = async request => {

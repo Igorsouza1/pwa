@@ -1,6 +1,6 @@
 <template >
     <div>
-        <Form class="m-2"  method="POST" action="http://localhost:8787/submit">
+        <Form class="m-2"  method="POST" action="https://pwa.igor1-souza5320.workers.dev/submit">
             <div class="form-group mb-2">
                 <label for="comprimentoDoCorpo">Comp. do Corpo:</label>
                 <Field type="number" v-model="comprimentoDoCorpo" class="form-control"

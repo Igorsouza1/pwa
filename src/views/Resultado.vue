@@ -42,7 +42,7 @@ export default {
     },
     methods: {
         async solicitacao() {
-            await fetch('http://localhost:8787/', {
+            await fetch('https://pwa.igor1-souza5320.workers.dev/', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
