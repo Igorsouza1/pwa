@@ -25,10 +25,12 @@ addEventListener('fetch', event => {
 async function formRequest(request) {
   const url = new URL(request.url)
   if (url.pathname === '/submit') {
+    console.log(url.pathname)
     return submitHandler(request)
-  }else
-  if(url.pathname === '/medidas'){
-    return "teste"
+  }
+
+  if(url.pathname === '/'){
+    return buscaMedidas(request)
   }
 
   return new Response('NAO É SUBMIT', { status: 200 });
@@ -78,14 +80,39 @@ const submitHandler = async request => {
   }else if(body.sexo == "0"){
     sexo = "macho"
   }
+
+  const qualidade = await machine.classify([parseInt(body.comprimentoCorpo),	parseInt(body.alturaDorso),	parseInt(body.larguraPeito),	parseInt(body.alturaGarupa),	parseInt(body.comprimentoEspadua),	parseInt(body.comprimentoDorsoLombar),	parseInt(body.alturaCernelha),	parseInt(body.larguraAncas),	relacaoDorsoGarupa,	relacaoAltCernelhaCorpo,	relacaoAncasDorso,	parseInt(body.sexo)])
+
   await medidasCavalos.put("sexo", sexo)
-
-
-  console.log(machine.classify([parseInt(body.comprimentoCorpo),	parseInt(body.alturaDorso),	parseInt(body.larguraPeito),	parseInt(body.alturaGarupa),	parseInt(body.comprimentoEspadua),	parseInt(body.comprimentoDorsoLombar),	parseInt(body.alturaCernelha),	parseInt(body.larguraAncas),	relacaoDorsoGarupa,	relacaoAltCernelhaCorpo,	relacaoAncasDorso,	parseInt(body.sexo)]))
+  await medidasCavalos.put("qualidade", qualidade)
+  console.log(qualidade)
 
   //console.log(JSON.stringify(body))
-  return Response.redirect("https://pwa-da1.pages.dev/#/resultado")
+  return Response.redirect("http://localhost:8080/#/resultado")
 }
 
  
-  
+// WRANGLER 2
+
+addEventListener("fetch", event => {
+  event.respondWith(buscaMedidas(event.request))
+})
+
+async function buscaMedidas(request) {
+    
+    const medidas = {
+      "alturaCernelha": await medidasCavalos.get("alturaCernelha"),
+      "alturaDorso": await medidasCavalos.get("alturaDorso"),
+      "alturaGarupa": await medidasCavalos.get("alturaGarupa"),
+      "comprimentoCorpo": await medidasCavalos.get("comprimentoCorpo"),
+      "comprimentoDorsoLombar": await medidasCavalos.get("comprimentoDorsoLombar"),
+      "comprimentoEspadua": await medidasCavalos.get("comprimentoEspadua"),
+      "larguraAncas": await medidasCavalos.get("larguraAncas"),
+      "larguraPeito": await medidasCavalos.get("larguraPeito"),
+      "sexo": await medidasCavalos.get("sexo")
+    }
+
+    console.log(await request.url)
+    return new Response(medidas)
+}
+

@@ -1,7 +1,7 @@
 <template>
     <div class="teste">
         <div class="card m-auto mt-2" style="width: 90%;">
-            <div class="card-body" >
+            <div class="card-body" v-bind:onload="solicitacao()" >
                 <h5 class="card-title">Cavalo Pantaneiro - Alta Qualidade</h5>
                 <p class="card-text">Média: {{media}} </p>
                 <p class="card-text">(1-2)Altura da Cernelha: {{comprimentoDaEspadua}} </p>
@@ -36,7 +36,11 @@ export default {
         }
     },
     methods:{
-       
+            async solicitacao(){
+                 await fetch("http://localhost:8787/", {
+                    method: "GET",
+                 }).then(data => console.log(data))
+            }
         }
 }
 </script>
