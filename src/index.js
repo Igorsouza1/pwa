@@ -13,26 +13,30 @@ import medidasx from "./assets/medidas/medidasX"
 import medidasy from "./assets/medidas/medidasY"
 
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET,HEAD,POST,OPTIONS',
-  'Access-Control-Max-Age': '86400',
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, HEAD, POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,Access-Control-Allow-Origin",
 }
 
 
 addEventListener('fetch', event => {
   console.log(`Received new request: ${event.request.url}`);
-  
+
   //POST DO FORMULARIO
-  event.respondWith(formRequest(event.request));
+  event.respondWith(handleRequest(event.request));
 })
 
 //Verifica se a URL é /SUBMIT
-async function formRequest(request) {
+async function handleRequest(request) {
 
-
+  if(request.method === "OPTIONS"){
+    return handleOptions(request)
+  }
   const url = new URL(request.url)
-  if (url.pathname === '/submit') {
+  if (request.method === 'POST') {
     return submitHandler(request)
+  } if (request.method === 'GET') {
+    return buscarMedidas(request)
   }
 
   return new Response('NAO É SUBMIT', { status: 200 });
@@ -40,8 +44,8 @@ async function formRequest(request) {
 
 
 const submitHandler = async request => {
-  
-  
+
+
   //Verifica se o method é POST
   if (request.method != 'POST') {
     return new Response("Metho Not Allowed", {
@@ -59,16 +63,16 @@ const submitHandler = async request => {
   //Aprendizado
   var k = 2; //k can be any integer
   var machine = new generator.kNear(k);
-  for (let i =0; medidasx.length > i; i++) {
-      machine.learn(medidasx[i], medidasy[i]);
+  for (let i = 0; medidasx.length > i; i++) {
+    machine.learn(medidasx[i], medidasy[i]);
   }
 
   //relações de medidas
-  let relacaoDorsoGarupa = parseInt(body.alturaDorso)/ parseInt(body.alturaGarupa)
+  let relacaoDorsoGarupa = parseInt(body.alturaDorso) / parseInt(body.alturaGarupa)
   let relacaoAltCernelhaCorpo = parseInt(body.alturaCernelha) / parseInt(body.comprimentoCorpo)
   let relacaoAncasDorso = parseInt(body.larguraAncas) / parseInt(body.alturaDorso)
-  
-  
+
+
   await medidasCavalos.put("comprimentoCorpo", body.comprimentoCorpo)
   await medidasCavalos.put("alturaDorso", body.alturaDorso)
   await medidasCavalos.put("larguraPeito", body.larguraPeito)
@@ -79,18 +83,59 @@ const submitHandler = async request => {
   await medidasCavalos.put("larguraAncas", body.larguraAncas)
 
   let sexo
-  if(body.sexo == "1"){
+  if (body.sexo == "1") {
     sexo = "femea"
-  }else if(body.sexo == "0"){
+  } else if (body.sexo == "0") {
     sexo = "macho"
   }
   await medidasCavalos.put("sexo", sexo)
 
 
-  console.log(machine.classify([parseInt(body.comprimentoCorpo),	parseInt(body.alturaDorso),	parseInt(body.larguraPeito),	parseInt(body.alturaGarupa),	parseInt(body.comprimentoEspadua),	parseInt(body.comprimentoDorsoLombar),	parseInt(body.alturaCernelha),	parseInt(body.larguraAncas),	relacaoDorsoGarupa,	relacaoAltCernelhaCorpo,	relacaoAncasDorso,	parseInt(body.sexo)]))
+  console.log(machine.classify([parseInt(body.comprimentoCorpo), parseInt(body.alturaDorso), parseInt(body.larguraPeito), parseInt(body.alturaGarupa), parseInt(body.comprimentoEspadua), parseInt(body.comprimentoDorsoLombar), parseInt(body.alturaCernelha), parseInt(body.larguraAncas), relacaoDorsoGarupa, relacaoAltCernelhaCorpo, relacaoAncasDorso, parseInt(body.sexo)]))
 
   //console.log(JSON.stringify(body))
-  return Response.redirect("https://pwa-da1.pages.dev/#/resultado")
+  return Response.redirect("http://localhost:8080/#/resultado")
 }
 
- 
+const buscarMedidas = async request => {
+
+  const medidas = {
+    "alturaCernelha": await medidasCavalos.get("alturaCernelha"),
+    "alturaGarupa": await medidasCavalos.get("alturaGarupa"),
+    "alturaDorso": await medidasCavalos.get("alturaDorso"),
+    "alturaAncas": await medidasCavalos.get("alturaAncas"),
+    "comprimentoCorpo": await medidasCavalos.get("comprimentoCorpo"),
+    "comprimentoDorsoLombar": await medidasCavalos.get("comprimentoDorsoLombar"),
+    "comprimentoEspadua": await medidasCavalos.get("comprimentoEspadua"),
+    "larguraAncas": await medidasCavalos.get("larguraAncas"),
+    "larguraPeito": await medidasCavalos.get("larguraPeito"),
+    "qualidade": await medidasCavalos.get("qualidade"),
+    "sexo": await medidasCavalos.get("sexo")
+  }
+
+  return new Response(JSON.stringify(medidas), {
+    headers: {
+      ...corsHeaders
+    }
+  })
+}
+
+
+
+function handleOptions(request){
+  if (request.headers.get("Origin") !== null &&
+    request.headers.get("Access-Control-Request-Method") !== null &&
+    request.headers.get("Access-Control-Request-Headers") !== null) {
+    // Handle CORS pre-flight request.
+    return new Response(null, {
+      headers: corsHeaders
+    })
+  } else {
+    // Handle standard OPTIONS request.
+    return new Response(null, {
+      headers: {
+        "Allow": "GET, HEAD, POST, OPTIONS",
+      }
+    })
+  }
+}
