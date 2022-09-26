@@ -33,9 +33,6 @@ async function formRequest(request) {
   const url = new URL(request.url)
   if (url.pathname === '/submit') {
     return submitHandler(request)
-  }else
-  if(url.pathname === '/medidas'){
-    return buscarMedidas(request)
   }
 
   return new Response('NAO É SUBMIT', { status: 200 });
@@ -93,14 +90,7 @@ const submitHandler = async request => {
   console.log(machine.classify([parseInt(body.comprimentoCorpo),	parseInt(body.alturaDorso),	parseInt(body.larguraPeito),	parseInt(body.alturaGarupa),	parseInt(body.comprimentoEspadua),	parseInt(body.comprimentoDorsoLombar),	parseInt(body.alturaCernelha),	parseInt(body.larguraAncas),	relacaoDorsoGarupa,	relacaoAltCernelhaCorpo,	relacaoAncasDorso,	parseInt(body.sexo)]))
 
   //console.log(JSON.stringify(body))
-  return Response.redirect("https://pwa.igor1-souza5320.workers.dev/#/resultado")
+  return Response.redirect("https://pwa-da1.pages.dev/#/resultado")
 }
 
  
-const buscarMedidas = async request =>{
-
-    const teste = await medidasCavalos.get("sexo")
-    console.log(teste)
-    return new Response(teste)
-
- }
