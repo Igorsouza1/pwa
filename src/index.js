@@ -12,6 +12,11 @@ import * as generator from "../node_modules/knear"
 import medidasx from "./assets/medidas/medidasX"
 import medidasy from "./assets/medidas/medidasY"
 
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET,HEAD,POST,OPTIONS',
+  'Access-Control-Max-Age': '86400',
+}
 
 
 addEventListener('fetch', event => {
@@ -23,12 +28,14 @@ addEventListener('fetch', event => {
 
 //Verifica se a URL é /SUBMIT
 async function formRequest(request) {
+
+
   const url = new URL(request.url)
   if (url.pathname === '/submit') {
     return submitHandler(request)
   }else
   if(url.pathname === '/medidas'){
-    return "teste"
+    return buscarMedidas(request)
   }
 
   return new Response('NAO É SUBMIT', { status: 200 });
@@ -36,6 +43,7 @@ async function formRequest(request) {
 
 
 const submitHandler = async request => {
+  
   
   //Verifica se o method é POST
   if (request.method != 'POST') {
@@ -85,8 +93,14 @@ const submitHandler = async request => {
   console.log(machine.classify([parseInt(body.comprimentoCorpo),	parseInt(body.alturaDorso),	parseInt(body.larguraPeito),	parseInt(body.alturaGarupa),	parseInt(body.comprimentoEspadua),	parseInt(body.comprimentoDorsoLombar),	parseInt(body.alturaCernelha),	parseInt(body.larguraAncas),	relacaoDorsoGarupa,	relacaoAltCernelhaCorpo,	relacaoAncasDorso,	parseInt(body.sexo)]))
 
   //console.log(JSON.stringify(body))
-  return Response.redirect("http://localhost:8080/#/resultado")
+  return Response.redirect("https://pwa.igor1-souza5320.workers.dev/#/resultado")
 }
 
  
-  
+const buscarMedidas = async request =>{
+
+    const teste = await medidasCavalos.get("sexo")
+    console.log(teste)
+    return new Response(teste)
+
+ }

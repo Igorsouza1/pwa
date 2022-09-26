@@ -38,7 +38,7 @@ export default {
     },
     methods:{
         solicitacao(){
-             fetch('https://pwa.igor1-souza5320.workers.dev').then(() => console.log("deu certo"))
+             fetch('https://pegarmedidas.igor1-souza5320.workers.dev').then((data) => this.qualidade = data.medidas.comprimentoCorpo)
         }
         
     }
