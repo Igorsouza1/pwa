@@ -92,7 +92,9 @@ const submitHandler = async request => {
 }
 
  
-// WRANGLER 2
+
+
+//GET DO KV
 
 addEventListener("fetch", event => {
   event.respondWith(buscaMedidas(event.request))
