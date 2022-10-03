@@ -1,56 +1,56 @@
 <template >
     <div>
-        <Form class="m-2"  method="POST" action="https://pwa.igor1-souza5320.workers.dev/submit">
+        <Form class="m-2"  method="POST" action="http://localhost:8787/submit">
             <div class="form-group mb-2">
-                <label for="comprimentoDoCorpo">Comp. do Corpo:</label>
-                <Field type="number" v-model="comprimentoDoCorpo" class="form-control"
-                    id="comprimentoDoCorpo" placeholder="Comprimento do Corpo" :rules="validate"
-                    name="comprimentoCorpo" />
+                <label for="alturaDaCernelha">Altura da Cernelha:</label>
+                <Field type="number" v-model="alturaDaCernelha" class="form-control"
+                    id="alturaDaCernelha" placeholder="altura Da Cernelha" :rules="validate"
+                    name="alturaDaCernelha" />
                 <ErrorMessage name="comprimentoCorpo" style="color: red;" />
             </div>
             <div class="form-group mb-2">
-                <label for="comprimentoDaEspadua">Comp. da espádua:</label>
-                <Field type="number" v-model="comprimentoDaEspadua" class="form-control"
-                    id="comprimentoDaEspadua" placeholder="Comprimento da espadua" :rules="validate"
-                    name="comprimentoEspadua" />
-                <ErrorMessage name="comprimentoEspadua" style="color: red;" />
+                <label for="alturaDoDorso">Altura do Dorso</label>
+                <Field type="number" v-model="alturaDoDorso" class="form-control"
+                    id="alturaDoDorso" placeholder="altura Do Dorso" :rules="validate"
+                    name="alturaDoDorso" />
+                <ErrorMessage name="alturaDoDorso" style="color: red;" />
             </div>
             <div class="form-group mb-2">
-                <label for="comprimentoDorsoLombar">Comp. dorso-lombar:</label>
-                <Field type="number" v-model="comprimentoDorsoLombar" class="form-control"
-                    id="comprimentoDorsoLombar" placeholder="Comprimento dorso-lombar" :rules="validate"
-                    name="comprimentoDorsoLombar" />
+                <label for="alturaDaGarupa">Altura da Garupa:</label>
+                <Field type="number" v-model="alturaDaGarupa" class="form-control"
+                    id="alturaDaGarupa" placeholder="altura Da Garupa" :rules="validate"
+                    name="alturaDaGarupa" />
+                <ErrorMessage name="alturaDaGarupa" style="color: red;" />
+            </div>
+            <div class="form-group mb-2">
+                <label for="comprimentoDoCorpo">Comprimento do Corpo:</label>
+                <Field type="number" v-model="comprimentoDoCorpo" class="form-control" id="comprimentoDoCorpo"
+                    placeholder="comprimento Do Corpo" :rules="validate" name="comprimentoDoCorpo" />
+                <ErrorMessage name="comprimentoDoCorpo" style="color: red;" />
+            </div>
+            <div class="form-group mb-2">
+                <label for="comprimentoDaEspadua">Comprimento da Espadua:</label>
+                <Field type="number" v-model="comprimentoDaEspadua" class="form-control" id="comprimentoDaEspadua"
+                    placeholder="Comprimento Da Espadua" :rules="validate" name="comprimentoDaEspadua" />
+                <ErrorMessage name="comprimentoDaEspadua" style="color: red;" />
+            </div>
+            <div class="form-group mb-2">
+                <label for="comprimentoDorsoLombar">Comprimento DorsoLombar:</label>
+                <Field type="number" v-model="comprimentoDorsoLombar" class="form-control" id="comprimentoDorsoLombar"
+                    placeholder="Comprimento DorsoLombar" :rules="validate" name="comprimentoDorsoLombar" />
                 <ErrorMessage name="comprimentoDorsoLombar" style="color: red;" />
             </div>
             <div class="form-group mb-2">
-                <label for="larguraDoPeito">Largura do peito:</label>
+                <label for="larguraDoPeito">Largura do Peito:</label>
                 <Field type="number" v-model="larguraDoPeito" class="form-control" id="larguraDoPeito"
-                    placeholder="Largura do peito" :rules="validate" name="larguraPeito" />
-                <ErrorMessage name="larguraPeito" style="color: red;" />
+                    placeholder="largura Do Peito" :rules="validate" name="larguraDoPeito" />
+                <ErrorMessage name="larguraDoPeito" style="color: red;" />
             </div>
             <div class="form-group mb-2">
-                <label for="larguraDasAncas">Largura das ancas:</label>
+                <label for="larguraDasAncas">Largura das Ancas:</label>
                 <Field type="number" v-model="larguraDasAncas" class="form-control" id="larguraDasAncas"
-                    placeholder="Largura das ancas" :rules="validate" name="larguraAncas" />
-                <ErrorMessage name="larguraAncas" style="color: red;" />
-            </div>
-            <div class="form-group mb-2">
-                <label for="alturaDaGarupa">Altura da garupa:</label>
-                <Field type="number" v-model="alturaDaGarupa" class="form-control" id="alturaDaGarupa"
-                    placeholder="Altura da garupa" :rules="validate" name="alturaGarupa" />
-                <ErrorMessage name="alturaGarupa" style="color: red;" />
-            </div>
-            <div class="form-group mb-2">
-                <label for="alturaDaCernelha">Altura da cernelha:</label>
-                <Field type="number" v-model="alturaDaCernelha" class="form-control" id="alturaDaCernelha"
-                    placeholder="Altura da cernelha" :rules="validate" name="alturaCernelha" />
-                <ErrorMessage name="alturaCernelha" style="color: red;" />
-            </div>
-            <div class="form-group mb-2">
-                <label for="alturaDoDorso">Altura do dorso:</label>
-                <Field type="number" v-model="alturaDoDorso" class="form-control" id="alturaDoDorso"
-                    placeholder="Altura do dorso" :rules="validate" name="alturaDorso" />
-                <ErrorMessage name="alturaDorso" style="color: red;" />
+                    placeholder="Altura do dorso" :rules="validate" name="larguraDasAncas" />
+                <ErrorMessage name="larguraDasAncas" style="color: red;" />
             </div>
             <fieldset class="form-group mb-2">
                 <div class="row">
