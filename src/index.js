@@ -8,113 +8,147 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-import * as generator from "../node_modules/knear"
-import medidasx from "./assets/medidas/medidasX"
-import medidasy from "./assets/medidas/medidasY"
+ import * as generator from "../node_modules/knear"
+import testex from "./assets/medidas/grupo3"
+ import medidasx from "./assets/medidas/treinoPlusX"
+ import medidasy from "./assets/medidas/treinoPlusY"
+ 
+ const corsHeaders = {
+   "Access-Control-Allow-Origin": "*",
+   "Access-Control-Allow-Methods": "GET, HEAD, POST, OPTIONS",
+   "Access-Control-Allow-Headers": "Content-Type,Authorization,Access-Control-Allow-Origin",
+ }
+ 
+ 
+ addEventListener('fetch', event => {
+   console.log(`Received new request: ${event.request.url}`);
+   //Métodos
+   event.respondWith(handleRequest(event.request));
+ })
+ 
+ //Verifica o metodo
+ async function handleRequest(request) {
+   if(request.method === "OPTIONS"){
+     return handleOptions(request)
+   }
+   const url = new URL(request.url)
+   if (request.method === 'POST') {
+     return submitHandler(request)
+   }else
+    if (request.method === 'GET') {
+     return buscarMedidas(request)
+   }else{
+     return new Response("Metho Not Allowed", {
+       status: 405
+     })
+   }
+ }
+ 
+ 
+ const submitHandler = async request => {
+   //Pega os dados do formulario, "comprimentoCorpo"...
+   const formData = await request.formData();
+   const body = {};
+   for (const entry of formData.entries()) {
+     body[entry[0]] = entry[1];
+   }
 
-
-
-addEventListener('fetch', event => {
-  console.log(`Received new request: ${event.request.url}`);
-  
-  //POST DO FORMULARIO
-  event.respondWith(formRequest(event.request));
-})
-
-//Verifica se a URL é /SUBMIT
-async function formRequest(request) {
-  const url = new URL(request.url)
-  if (url.pathname === '/submit') {
-    console.log(url.pathname)
-    return submitHandler(request)
+   
+   var k = 3; //k can be any integer
+   var machine = new generator.kNear(k);
+   for (let i = 0; medidasx.length > i; i++) {
+    machine.learn(medidasx[i], medidasy[i]);
   }
-
-  if(url.pathname === '/'){
-    return buscaMedidas(request)
-  }
-
-  return new Response('NAO É SUBMIT', { status: 200 });
-}
-
-
-const submitHandler = async request => {
-  
-  //Verifica se o method é POST
-  if (request.method != 'POST') {
-    return new Response("Metho Not Allowed", {
-      status: 405
-    })
-  }
-
-  //Pega os dados do formulario, "comprimentoCorpo"...
-  const formData = await request.formData();
-  const body = {};
-  for (const entry of formData.entries()) {
-    body[entry[0]] = entry[1];
-  }
-
-  //Aprendizado
-  var k = 2; //k can be any integer
-  var machine = new generator.kNear(k);
-  for (let i =0; medidasx.length > i; i++) {
-      machine.learn(medidasx[i], medidasy[i]);
-  }
-
-  //relações de medidas
-  let relacaoDorsoGarupa = parseInt(body.alturaDorso)/ parseInt(body.alturaGarupa)
-  let relacaoAltCernelhaCorpo = parseInt(body.alturaCernelha) / parseInt(body.comprimentoCorpo)
-  let relacaoAncasDorso = parseInt(body.larguraAncas) / parseInt(body.alturaDorso)
-  
-  await medidasCavalos.put("comprimentoCorpo", body.comprimentoCorpo)
-  await medidasCavalos.put("alturaDorso", body.alturaDorso)
-  await medidasCavalos.put("larguraPeito", body.larguraPeito)
-  await medidasCavalos.put("alturaGarupa", body.alturaGarupa)
-  await medidasCavalos.put("comprimentoEspadua", body.comprimentoEspadua)
-  await medidasCavalos.put("comprimentoDorsoLombar", body.comprimentoDorsoLombar)
-  await medidasCavalos.put("alturaCernelha", body.alturaCernelha)
-  await medidasCavalos.put("larguraAncas", body.larguraAncas)
-
-  let sexo
-  if(body.sexo == "1"){
-    sexo = "femea"
-  }else if(body.sexo == "0"){
-    sexo = "macho"
-  }
-
-  const qualidade = await machine.classify([parseInt(body.comprimentoCorpo),	parseInt(body.alturaDorso),	parseInt(body.larguraPeito),	parseInt(body.alturaGarupa),	parseInt(body.comprimentoEspadua),	parseInt(body.comprimentoDorsoLombar),	parseInt(body.alturaCernelha),	parseInt(body.larguraAncas),	relacaoDorsoGarupa,	relacaoAltCernelhaCorpo,	relacaoAncasDorso,	parseInt(body.sexo)])
-
-  await medidasCavalos.put("sexo", sexo)
-  await medidasCavalos.put("qualidade", qualidade)
-  console.log(qualidade)
-
-  //console.log(JSON.stringify(body))
-  return Response.redirect("http://localhost:8080/#/resultado")
-}
-
+ 
+   //Aprendizado
+   console.log(machine.classify(inputMedidas(body)))
+   const qualidade = machine.classify(inputMedidas(body))
+   await salvarNoKV(body, qualidade)
  
 
-
-//GET DO KV
-
-addEventListener("fetch", event => {
-  event.respondWith(buscaMedidas(event.request))
-})
-
-async function buscaMedidas(request) {
-    
-    const medidas = {
-      "alturaCernelha": await medidasCavalos.get("alturaCernelha"),
-      "alturaDorso": await medidasCavalos.get("alturaDorso"),
-      "alturaGarupa": await medidasCavalos.get("alturaGarupa"),
-      "comprimentoCorpo": await medidasCavalos.get("comprimentoCorpo"),
-      "comprimentoDorsoLombar": await medidasCavalos.get("comprimentoDorsoLombar"),
-      "comprimentoEspadua": await medidasCavalos.get("comprimentoEspadua"),
-      "larguraAncas": await medidasCavalos.get("larguraAncas"),
-      "larguraPeito": await medidasCavalos.get("larguraPeito"),
-      "sexo": await medidasCavalos.get("sexo")
-    }
-
-    console.log(await request.url)
-    return new Response(medidas)
-}
-
+   //console.log(JSON.stringify(body))
+   return Response.redirect("https://pwa-da1.pages.dev/#/resultado")
+ }
+ 
+ const buscarMedidas = async request => {
+   const medidas = {
+     "alturaCernelha": await medidasCavalos.get("alturaCernelha"),
+     "alturaGarupa": await medidasCavalos.get("alturaGarupa"),
+     "alturaDorso": await medidasCavalos.get("alturaDorso"),
+     "comprimentoCorpo": await medidasCavalos.get("comprimentoCorpo"),
+     "comprimentoDorsoLombar": await medidasCavalos.get("comprimentoDorsoLombar"),
+     "comprimentoEspadua": await medidasCavalos.get("comprimentoEspadua"),
+     "larguraAncas": await medidasCavalos.get("larguraAncas"),
+     "larguraPeito": await medidasCavalos.get("larguraPeito"),
+     "qualidade": await medidasCavalos.get("qualidade"),
+     "sexo": await medidasCavalos.get("sexo")
+   }
+ 
+   return new Response(JSON.stringify(medidas), {
+     headers: {
+       ...corsHeaders
+     }
+   })
+ }
+ 
+ 
+ 
+ function handleOptions(request){
+   if (request.headers.get("Origin") !== null &&
+     request.headers.get("Access-Control-Request-Method") !== null &&
+     request.headers.get("Access-Control-Request-Headers") !== null) {
+     // Handle CORS pre-flight request.
+     return new Response(null, {
+       headers: corsHeaders
+     })
+   } else {
+     // Handle standard OPTIONS request.
+     return new Response(null, {
+       headers: {
+         "Allow": "GET, HEAD, POST, OPTIONS",
+       }
+     })
+   }
+ }
+ 
+ 
+ 
+ async function salvarNoKV(body, qualidade){
+   await medidasCavalos.put("comprimentoCorpo", body.comprimentoDoCorpo)
+   await medidasCavalos.put("alturaDorso", body.alturaDoDorso)
+   await medidasCavalos.put("larguraPeito", body.larguraDoPeito)
+   await medidasCavalos.put("alturaGarupa", body.alturaDaGarupa)
+   await medidasCavalos.put("comprimentoEspadua", body.comprimentoDaEspadua)
+   await medidasCavalos.put("comprimentoDorsoLombar", body.comprimentoDorsoLombar)
+   await medidasCavalos.put("alturaCernelha", body.alturaDaCernelha)
+   await medidasCavalos.put("larguraAncas", body.larguraDasAncas)
+   let sexo
+   if (body.sexo == "1") {
+     sexo = "femea"
+   } else if (body.sexo == "0") {
+     sexo = "macho"
+   }
+   await medidasCavalos.put("sexo", sexo)
+   await medidasCavalos.put("qualidade", qualidade)
+ }
+ 
+ 
+ 
+ function inputMedidas(body){
+   const medidasInput = []
+   medidasInput.push()
+   let relacaoDorsoGarupa = parseInt(body.alturaDorso) / parseInt(body.alturaGarupa)
+   let relacaoAltCernelhaCorpo = parseInt(body.alturaCernelha) / parseInt(body.comprimentoCorpo)
+   let relacaoAncasDorso = parseInt(body.larguraAncas) / parseInt(body.alturaDorso)
+   medidasInput.push(relacaoDorsoGarupa)
+   medidasInput.push(relacaoAltCernelhaCorpo)
+   medidasInput.push(relacaoAncasDorso)
+   medidasInput.push(parseInt(body.comprimentoCorpo))
+   medidasInput.push(parseInt(body.alturaDorso))
+   medidasInput.push(parseInt(body.larguraPeito))
+   medidasInput.push(parseInt(body.alturaGarupa))
+   medidasInput.push(parseInt(body.comprimentoEspadua))
+   medidasInput.push(parseInt(body.comprimentoDorsoLombar))
+   medidasInput.push(parseInt(body.larguraAncas))
+   return medidasInput
+ }
