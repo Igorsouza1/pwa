@@ -8,6 +8,10 @@ module.exports = defineConfig({
   pwa: {
     name: 'Cavalo Pantaneiro',
     themeColor: '#4DBA88'
-  }
+  },
+  devServer: {
+    proxy: 'http://localhost:8787/', 
+    }
+    
  
 })
