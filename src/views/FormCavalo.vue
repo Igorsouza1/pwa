@@ -1,6 +1,6 @@
 <template >
     <div>
-        <Form class="m-2"  method="POST" action="pwa.igor1-souza5320.workers.dev/submit">
+        <Form class="m-2"  method="POST" action="https://pwa.igor1-souza5320.workers.dev/submit">
             <div class="form-group mb-2">
                 <label for="alturaDaCernelha">Altura da Cernelha:</label>
                 <Field type="number" v-model="alturaDaCernelha" class="form-control"
